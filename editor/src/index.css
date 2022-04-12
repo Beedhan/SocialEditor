@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  touch-action: none;
+}
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background-color: #1a1b1e;
+  overflow: hidden;
+  position: relative;
+}
+
+.AppContainer {
+  display: grid;
+  grid-template-rows: 7% 93%;
+  grid-template-columns: 25% 75%;
+  height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  row-gap: 3%;
+  position: relative;
+  /* align-items: flex-start; */
+}
+.appHeader {
+  grid-column: span 2;
+}
+
+.resolutionLists::-webkit-scrollbar {
+  width: 10px;
+  height: 16px;
+}
+
+/* Track */
+.resolutionLists::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
+}
+
+/* Handle */
+.resolutionLists::-webkit-scrollbar-thumb {
+  background: #8a8a8a;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+.resolutionLists::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-indigo-700;
+  }
+}
