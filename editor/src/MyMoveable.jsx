@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Moveable from 'react-moveable';
 
 const MyMoveable = ({ target }) => {
@@ -6,14 +6,20 @@ const MyMoveable = ({ target }) => {
         translate: [0, 0],
         scale: [1, 1],
     });
+
+    const setTransform = target => {
+        target.style.cssText = frame.toCSS();
+        document.getElementById("info").innerHTML = frame.toCSS().toString();
+    };
+
     return (
         <Moveable
             target={target}
-            scalable={false}
+            scalable={true}
             draggable={true}
-            resizable={true}
+            resizable={false}
             rotatable={true}
-            keepRatio={false}
+            keepRatio={true}
             throttleScale={0}
             renderDirections={["nw", "n", "ne", "w", "e", "sw", "s", "se"]}
             edge={true}
@@ -22,6 +28,7 @@ const MyMoveable = ({ target }) => {
             padding={{ "left": 0, "top": 0, "right": 0, "bottom": 0 }}
             onDragStart={e => {
                 e.set(frame.translate);
+                e.setTransform(e.target.style.transform)
             }}
             onDrag={({ target, transform }) => {
                 target.style.transform = transform;
@@ -31,29 +38,12 @@ const MyMoveable = ({ target }) => {
                     frame.translate = lastEvent.beforeTranslate;
                 }
             }}
-            onScaleStart={e => {
-                e.set(frame.scale);
-                e.dragStart && e.dragStart.set(frame.translate);
-            }}
-            onScale={e => {
-                const beforeTranslate = e.drag.beforeTranslate;
-                frame.translate = beforeTranslate;
-                frame.scale = e.scale;
-                e.target.style.transform
-                    = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`
-                    + ` scale(${e.scale[0]}, ${e.scale[1]})`;
-            }}
-            onResizeStart={e => {
-                e.setOrigin(["%", "%"]);
-                e.dragStart && e.dragStart.set(frame.translate);
-            }}
-            onResize={e => {
-                const beforeTranslate = e.drag.beforeTranslate;
-
-                frame.translate = beforeTranslate;
-                e.target.style.width = `${e.width}px`;
-                e.target.style.height = `${e.height}px`;
-                e.target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+            // onScaleStart={e => {
+            //     console.log("hhhh")
+            //     e.target.style.transform = e.drag.transform;
+            // }}
+            onScale={({ target, delta, clientX, clientY, isPinch, transform }) => {
+                target.style.transform = transform
             }}
             onRotateStart={e => {
                 e.set(frame.rotate);
@@ -62,7 +52,6 @@ const MyMoveable = ({ target }) => {
                 const trans = e.transform.split(" ")[0] + e.transform.split(" ")[1];
                 frame.rotate = e.beforeRotate;
                 target.style.transform = `rotate(${e.absoluteRotate})deg`;
-                console.log(target.style.transform)
             }}
         />
     )

@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
         "Pinterest"
-    ]
+    ],
+    "emmet.showAbbreviationSuggestions": false,
+    "emmet.preferences": {
+    },
+    "editor.snippetSuggestions": "bottom",
+    "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly"
 }

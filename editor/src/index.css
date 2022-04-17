@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,6 @@ html {
   width: 100%;
 }
 body {
-  background-color: #1a1b1e;
   overflow: hidden;
   position: relative;
 }
@@ -60,4 +60,17 @@ body {
   .btn-primary {
     @apply bg-indigo-700;
   }
+  .btn-primary-light {
+    @apply bg-red-700;
+  }
+  .flexed-container {
+    @apply flex justify-between flex-col text-white my-2;
+  }
+}
+
+.selected_delete {
+  position: absolute;
+  top: 0;
+  left: 90%;
+  z-index: 999;
 }

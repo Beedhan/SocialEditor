@@ -2,6 +2,7 @@ import ReactCircularSlider from "@fseehawer/react-circular-slider";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_CANVAS_BG } from "../../../../redux/actions/CanvasAction";
+import { GradientToArray } from "../../../../utils/GradientArray";
 import MapPoints from "./MapPoints";
 import Suggestions from "./Suggestions";
 
@@ -12,16 +13,14 @@ const GradientPicker = () => {
     const [points, setPoints] = useState([
         {
             color: "#228ae6",
-            active: false
         },
         {
             color: "#12b886",
-            active: false
         },
     ]);
 
     useEffect(() => {
-        dispatch({ type: SET_CANVAS_BG, payload: "linear-gradient(90deg,#228ae6,#12b886)" })
+        setPoints(GradientToArray(canvasBg.gradient))
     }, [])
 
     const addPoint = () => {
@@ -31,9 +30,9 @@ const GradientPicker = () => {
     };
 
     const handleSliderChange = (value) => {
-        let color = canvasBg;
+        let color = canvasBg.gradient;
         let changedValue = color.replace(/([0-9]+deg)/g, `${value}deg`);
-        dispatch({ type: SET_CANVAS_BG, payload: changedValue })
+        dispatch({ type: SET_CANVAS_BG, payload: { value: changedValue, type: "GRADIENT" } })
         setGradientDeg(value);
     }
 
@@ -43,7 +42,7 @@ const GradientPicker = () => {
         <div className="w-full h-full">
             <div
                 className="h-4 mt-20 mb-10 flex justify-between"
-                style={{ background: canvasBg, cursor: "pointer" }}
+                style={{ background: canvasBg.gradient, cursor: "pointer" }}
                 onClick={addPoint}
             >
                 <MapPoints points={points} setPoints={setPoints} gradientDeg={gradientDeg} />

@@ -9,12 +9,12 @@ import { SET_CANVAS_BG } from "../../../../redux/actions/CanvasAction";
 const BackgroundColor = () => {
   const dispatch = useDispatch();
   const onColorChange = (color) => {
-    dispatch({ type: SET_CANVAS_BG, payload: color })
+    dispatch({ type: SET_CANVAS_BG, payload: { value: color, type: "SOLID" } })
 
   };
 
   useEffect(() => {
-    dispatch({ type: SET_CANVAS_BG, payload: "#228ae6" })
+    // dispatch({ type: SET_CANVAS_BG, payload: "#228ae6" })
   }, [])
 
 

@@ -46,5 +46,14 @@ export const resolutions = [
                 { name: "Cover", size: "1500 x 500" },
                 { name: "Link", size: "1200 x 628" },
             ]
+    },
+    {
+        site: "Youtube",
+        res:
+            [
+                { name: "Thumbnail", size: "1280 x 720" },
+                { name: "Banner", size: "2560 x 1440" },
+            ]
     }
 ]
+

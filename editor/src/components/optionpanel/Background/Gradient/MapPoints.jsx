@@ -43,7 +43,7 @@ const MapPoints = ({ points, setPoints }) => {
                 return (color += point.color + ",");
             }
         });
-        dispatch({ type: SET_CANVAS_BG, payload: color })
+        dispatch({ type: SET_CANVAS_BG, payload: { value: color, type: "GRADIENT" } })
     };
 
     return (
